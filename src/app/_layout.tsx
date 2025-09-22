@@ -1,6 +1,7 @@
 import { Slot } from "expo-router";
 
 import {ThemeProvider, DarkTheme} from '@react-navigation/native'
+import "../../tailwind.css"
 
 const black = '#111111'
 const white = '#e5e5e7'
