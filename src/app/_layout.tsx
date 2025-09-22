@@ -2,14 +2,17 @@ import { Slot } from "expo-router";
 
 import {ThemeProvider, DarkTheme} from '@react-navigation/native'
 
+const black = '#111111'
+const white = '#e5e5e7'
 const myTheme: typeof DarkTheme = {
     ...DarkTheme,
     colors: {
         ...DarkTheme.colors,
-        primary: '#e5e5e7',
-        background: '#212121',
-        card: '#212121',
-        border: '#212121',
+        primary: white,
+        text: white,
+        background: black,
+        card: '#101010',
+        border: '#101010',
     }
 }
 
