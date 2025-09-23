@@ -2,6 +2,7 @@ import { Slot } from "expo-router";
 
 import {ThemeProvider, DarkTheme} from '@react-navigation/native'
 import "../../tailwind.css"
+import { StatusBar } from "expo-status-bar";
 
 const black = '#111111'
 const white = '#e5e5e7'
@@ -21,5 +22,6 @@ const myTheme: typeof DarkTheme = {
 export default function RootLayout(){
     return <ThemeProvider value={myTheme}>
         <Slot />
+        <StatusBar style="auto" />
     </ThemeProvider>
 }
