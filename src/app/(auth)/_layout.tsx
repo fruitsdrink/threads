@@ -1,6 +1,13 @@
-import { Stack } from "expo-router";
+import { useAuth } from "@/providers/auth.provider";
+import { Redirect, Stack } from "expo-router";
 
 export default function AuthLayout() {
+  const { isAuthenticated } = useAuth();
+
+  if (isAuthenticated) {
+    return <Redirect href={"/(protected)/(tabs)"} />;
+  }
+
   return (
     <Stack>
       <Stack.Screen

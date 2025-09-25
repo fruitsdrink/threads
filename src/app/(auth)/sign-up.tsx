@@ -1,6 +1,8 @@
-import { Link } from "expo-router";
+import { supabase } from "@/lib/supabase";
+import { Link, router } from "expo-router";
 import { useState } from "react";
 import {
+  Alert,
   Pressable,
   Text,
   TextInput,
@@ -13,15 +15,32 @@ export default function SignUpScreen() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  function handleLogin() {
+  async function handleSignUp() {
     if (!email || !password) {
+      Alert.alert("Please enter email and password");
       return;
     }
-
     try {
       setIsLoading(true);
+      const {
+        data: { session },
+        error,
+      } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+      if (error) {
+        Alert.alert(error.message);
+        return;
+      }
+      if (!session) {
+        Alert.alert("Please check your inbox for email verification!");
+        return;
+      }
+      router.dismissTo("/sign-in");
     } catch (error) {
       console.error(error);
+      if (error instanceof Error) Alert.alert(error.message);
     } finally {
       setIsLoading(false);
     }
@@ -60,6 +79,7 @@ export default function SignUpScreen() {
               keyboardType="visible-password"
               autoCapitalize={"none"}
               autoCorrect={false}
+              secureTextEntry
               value={password}
               onChangeText={setPassword}
             />
@@ -68,7 +88,7 @@ export default function SignUpScreen() {
           <TouchableOpacity
             activeOpacity={0.8}
             className="w-full bg-white py-3 rounded-lg mt-6"
-            onPress={handleLogin}
+            onPress={handleSignUp}
             disabled={isLoading}
           >
             <Text className="text-black text-center font-semibold">

@@ -1,6 +1,8 @@
+import { supabase } from "@/lib/supabase";
 import { Link } from "expo-router";
 import { useState } from "react";
 import {
+  Alert,
   Pressable,
   Text,
   TextInput,
@@ -9,17 +11,26 @@ import {
 } from "react-native";
 
 export default function SignInScreen() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("fruitsdrink@126.com");
+  const [password, setPassword] = useState("12345678");
   const [isLoading, setIsLoading] = useState(false);
 
-  function handleLogin() {
+  async function handleLogin() {
     if (!email || !password) {
+      Alert.alert("Please enter email and password");
       return;
     }
 
     try {
       setIsLoading(true);
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      if (error) {
+        Alert.alert(error.message);
+        return;
+      }
     } catch (error) {
       console.error(error);
     } finally {
@@ -60,6 +71,7 @@ export default function SignInScreen() {
               keyboardType="visible-password"
               autoCapitalize={"none"}
               autoCorrect={false}
+              secureTextEntry
               value={password}
               onChangeText={setPassword}
             />
