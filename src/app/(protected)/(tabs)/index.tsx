@@ -10,9 +10,20 @@ export default function HomeScreen() {
       renderItem={({ item }) => <PostListItem post={item} />}
       keyExtractor={(item) => item.id}
       ListHeaderComponent={() => (
-        <Link href={"/new"} className="text-blue-500 p-4 text-center text-3xl">
-          New Post
-        </Link>
+        <>
+          <Link
+            href={"/new"}
+            className="text-blue-500 p-4 text-center text-3xl"
+          >
+            New Post
+          </Link>
+          <Link
+            href={"/sign-in"}
+            className="text-blue-500 p-4 text-center text-3xl"
+          >
+            Sing In
+          </Link>
+        </>
       )}
     />
   );
