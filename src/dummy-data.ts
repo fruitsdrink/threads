@@ -5,35 +5,35 @@ export const dummyUsers: User[] = [
     id: "1",
     username: "johndoe",
     name: "John Doe",
-    image: "https://i.pravatar.cc/150?img=1",
+    avatar_url: "https://i.pravatar.cc/150?img=1",
     bio: "Software developer and tech enthusiast",
   },
   {
     id: "2",
     username: "janedoe",
     name: "Jane Doe",
-    image: "https://i.pravatar.cc/150?img=2",
+    avatar_url: "https://i.pravatar.cc/150?img=2",
     bio: "Digital artist and creative thinker",
   },
   {
     id: "3",
     username: "alexsmith",
     name: "Alex Smith",
-    image: "https://i.pravatar.cc/150?img=3",
+    avatar_url: "https://i.pravatar.cc/150?img=3",
     bio: "Travel photographer and adventure seeker",
   },
   {
     id: "4",
     username: "sarahjones",
     name: "Sarah Jones",
-    image: "https://i.pravatar.cc/150?img=4",
+    avatar_url: "https://i.pravatar.cc/150?img=4",
     bio: "Fitness trainer and wellness coach",
   },
   {
     id: "5",
     username: "mikebrown",
     name: "Mike Brown",
-    image: "https://i.pravatar.cc/150?img=5",
+    avatar_url: "https://i.pravatar.cc/150?img=5",
     bio: "Entrepreneur and startup founder",
   },
 ];
@@ -41,7 +41,7 @@ export const dummyUsers: User[] = [
 export const dummyPosts: Post[] = [
   {
     id: "1",
-    createdAt: "2025-09-24T15:00:00Z",
+    created_at: "2025-09-24T15:00:00Z",
     content:
       "Just launched my new project! Check it out and let me know what you think.",
     user_id: "1",
@@ -52,7 +52,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: "2",
-    createdAt: "2024-05-01T11:30:00Z",
+    created_at: "2024-05-01T11:30:00Z",
     content:
       "Working on some new digital art pieces. Can't wait to share them with you all!",
     user_id: "2",
@@ -63,7 +63,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: "3",
-    createdAt: "2024-05-01T12:15:00Z",
+    created_at: "2024-05-01T12:15:00Z",
     content: "Just captured this amazing sunset in Bali! 🌅",
     user_id: "3",
     user: dummyUsers[2],
@@ -73,7 +73,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: "4",
-    createdAt: "2024-05-01T13:00:00Z",
+    created_at: "2024-05-01T13:00:00Z",
     content: "New workout routine is paying off! Feeling stronger every day 💪",
     user_id: "4",
     user: dummyUsers[3],
@@ -83,7 +83,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: "5",
-    createdAt: "2024-05-01T14:30:00Z",
+    created_at: "2024-05-01T14:30:00Z",
     content: "Excited to announce our startup just secured seed funding!",
     user_id: "5",
     user: dummyUsers[4],
@@ -93,7 +93,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: "6",
-    createdAt: "2024-05-01T15:00:00Z",
+    created_at: "2024-05-01T15:00:00Z",
     content: "That's amazing! What's the project about?",
     user_id: "2",
     user: dummyUsers[1],
@@ -103,7 +103,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: "7",
-    createdAt: "2024-05-01T15:30:00Z",
+    created_at: "2024-05-01T15:30:00Z",
     content: "It's a new productivity app that helps teams collaborate better.",
     user_id: "1",
     user: dummyUsers[0],
@@ -113,7 +113,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: "8",
-    createdAt: "2024-05-01T16:00:00Z",
+    created_at: "2024-05-01T16:00:00Z",
     content: "The sunset looks incredible! What camera did you use?",
     user_id: "4",
     user: dummyUsers[3],
@@ -123,7 +123,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: "9",
-    createdAt: "2024-05-01T16:30:00Z",
+    created_at: "2024-05-01T16:30:00Z",
     content: "I used my Sony A7III with a 24-70mm lens.",
     user_id: "3",
     user: dummyUsers[2],
@@ -133,7 +133,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: "10",
-    createdAt: "2024-05-01T17:00:00Z",
+    created_at: "2024-05-01T17:00:00Z",
     content: "Congrats on the funding! What's your next milestone?",
     user_id: "1",
     user: dummyUsers[0],
@@ -143,7 +143,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: "11",
-    createdAt: "2024-05-01T17:30:00Z",
+    created_at: "2024-05-01T17:30:00Z",
     content: "We're focusing on expanding our team and launching new features.",
     user_id: "5",
     user: dummyUsers[4],
@@ -153,7 +153,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: "12",
-    createdAt: "2024-05-01T18:00:00Z",
+    created_at: "2024-05-01T18:00:00Z",
     content: "Can you share some tips for staying motivated with workouts?",
     user_id: "2",
     user: dummyUsers[1],
@@ -163,7 +163,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: "13",
-    createdAt: "2024-05-01T18:30:00Z",
+    created_at: "2024-05-01T18:30:00Z",
     content: "Set small, achievable goals and track your progress!",
     user_id: "4",
     user: dummyUsers[3],
@@ -173,7 +173,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: "14",
-    createdAt: "2024-05-01T19:00:00Z",
+    created_at: "2024-05-01T19:00:00Z",
     content: "Love your art style! Do you take commissions?",
     user_id: "3",
     user: dummyUsers[2],
@@ -183,7 +183,7 @@ export const dummyPosts: Post[] = [
   },
   {
     id: "15",
-    createdAt: "2024-05-01T19:30:00Z",
+    created_at: "2024-05-01T19:30:00Z",
     content: "Yes, I do! Feel free to DM me for details.",
     user_id: "2",
     user: dummyUsers[1],
