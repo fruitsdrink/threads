@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabase";
 import { User } from "@supabase/supabase-js";
 import React, { createContext, use, useEffect, useState } from "react";
+import { ActivityIndicator, View } from "react-native";
 
 type AuthContextType = {
   user: User | null;
@@ -26,9 +27,12 @@ export const AuthProvider: React.FC<React.PropsWithChildren> = ({
 }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    console.log('useEffect')
     supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log('getSession')
       if (session) {
         setUser(session.user);
         setIsAuthenticated(true);
@@ -36,11 +40,13 @@ export const AuthProvider: React.FC<React.PropsWithChildren> = ({
         setUser(null);
         setIsAuthenticated(false);
       }
-    });
+      setIsLoading(false)
+      });
 
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
+      console.log('onAuthStateChange')
       if (session) {
         setUser(session.user);
         setIsAuthenticated(true);
@@ -53,7 +59,15 @@ export const AuthProvider: React.FC<React.PropsWithChildren> = ({
     return () => {
       subscription.unsubscribe();
     };
-  }, [supabase]);
+  }, []);
+
+  if(isLoading) {
+    return (
+      <View className="flex-1 items-center justify-center">
+        <ActivityIndicator size={"large"} />
+      </View>
+    )
+  }
 
   return (
     <AuthContext.Provider
