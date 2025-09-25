@@ -1,242 +1,194 @@
-import { User, Post } from './types';
+import { User, Post } from "./types";
 
-// Generate 5 unique users
-const users: User[] = [
+export const dummyUsers: User[] = [
   {
-    id: 'user1',
-    username: 'alex_tech',
-    name: 'Alex Johnson',
-    image: 'https://randomuser.me/api/portraits/men/32.jpg',
-    bio: 'Tech enthusiast | Web Developer | Coffee lover',
+    id: "1",
+    username: "johndoe",
+    name: "John Doe",
+    image: "https://i.pravatar.cc/150?img=1",
+    bio: "Software developer and tech enthusiast",
   },
   {
-    id: 'user2',
-    username: 'taylor_swiftie',
-    name: 'Taylor Chen',
-    image: 'https://randomuser.me/api/portraits/women/44.jpg',
-    bio: 'Music producer | Cat mom | Travel junkie',
+    id: "2",
+    username: "janedoe",
+    name: "Jane Doe",
+    image: "https://i.pravatar.cc/150?img=2",
+    bio: "Digital artist and creative thinker",
   },
   {
-    id: 'user3',
-    username: 'jordan_designs',
-    name: 'Jordan Lee',
-    image: 'https://randomuser.me/api/portraits/men/22.jpg',
-    bio: 'UI/UX Designer | Minimalist | Coffee snob',
+    id: "3",
+    username: "alexsmith",
+    name: "Alex Smith",
+    image: "https://i.pravatar.cc/150?img=3",
+    bio: "Travel photographer and adventure seeker",
   },
   {
-    id: 'user4',
-    username: 'sam_writes',
-    name: 'Sam Wilson',
-    image: 'https://randomuser.me/api/portraits/women/63.jpg',
-    bio: 'Author | Bookworm | Tea enthusiast',
+    id: "4",
+    username: "sarahjones",
+    name: "Sarah Jones",
+    image: "https://i.pravatar.cc/150?img=4",
+    bio: "Fitness trainer and wellness coach",
   },
   {
-    id: 'user5',
-    username: 'morgan_photos',
-    name: 'Morgan Taylor',
-    image: 'https://randomuser.me/api/portraits/women/28.jpg',
-    bio: 'Photographer | Nature lover | Coffee addict',
+    id: "5",
+    username: "mikebrown",
+    name: "Mike Brown",
+    image: "https://i.pravatar.cc/150?img=5",
+    bio: "Entrepreneur and startup founder",
   },
 ];
 
-// Helper function to create a post
-const createPost = (
-  id: string,
-  user: User,
-  content: string,
-  parentId: string | null = null,
-  replies: Post[] = [],
-  daysAgo: number = 0
-): Post => {
-  const date = new Date();
-  date.setDate(date.getDate() - daysAgo);
-  
-  return {
-    id,
-    createdAt: date.toISOString(),
-    content,
-    user_id: user.id,
-    user,
-    parent_id: parentId,
-    parent: null, // Will be populated later
-    replies,
-  };
-};
-
-// Create posts
-const posts: Post[] = [];
-
-// Main posts
-const post1 = createPost(
-  'post1',
-  users[0],
-  'Just launched my new portfolio website! Check it out and let me know what you think. #webdev #portfolio',
-  null,
-  [],
-  1
-);
-
-const post2 = createPost(
-  'post2',
-  users[1],
-  'Working on a new music track. Can\'t wait to share it with you all! 🎵 #musicproduction',
-  null,
-  [],
-  2
-);
-
-const post3 = createPost(
-  'post3',
-  users[2],
-  'Design tip: White space is not your enemy. Sometimes less is more. #design #uidesign',
-  null,
-  [],
-  3
-);
-
-// Add replies to post1
-const reply1 = createPost(
-  'reply1',
-  users[3],
-  'The animations are so smooth! What framework did you use?',
-  'post1',
-  [],
-  0.5
-);
-
-const reply2 = createPost(
-  'reply2',
-  users[4],
-  'Love the dark mode toggle! Great work 👏',
-  'post1',
-  [],
-  0.2
-);
-
-const reply3 = createPost(
-  'reply3',
-  users[1],
-  'I used React with Framer Motion for the animations. Thanks for checking it out!',
-  'reply1',
-  [],
-  0.1
-);
-
-// Add replies to post2
-const reply4 = createPost(
-  'reply4',
-  users[0],
-  'Looking forward to hearing it! What genre is it?',
-  'post2',
-  [],
-  0.8
-);
-
-const reply5 = createPost(
-  'reply5',
-  users[2],
-  'I love your work! Can you share your production setup?',
-  'post2',
-  [],
-  0.5
-);
-
-// Add more posts
-const post4 = createPost(
-  'post4',
-  users[3],
-  'Just finished reading "Atomic Habits". Highly recommend it for anyone looking to build better habits! #reading #selfimprovement',
-  null,
-  [],
-  4
-);
-
-const post5 = createPost(
-  'post5',
-  users[4],
-  'Sunset views from my latest photoshoot. Nature never disappoints. 🌅 #photography #nature',
-  null,
-  [],
-  5
-);
-
-// Add replies to post5
-const reply6 = createPost(
-  'reply6',
-  users[0],
-  'Stunning shot! What camera do you use?',
-  'post5',
-  [],
-  0.3
-);
-
-const reply7 = createPost(
-  'reply7',
-  users[2],
-  'The colors are amazing! Did you edit this in Lightroom?',
-  'post5',
-  [],
-  0.1
-);
-
-// Additional replies to reach 15 total posts
-const reply8 = createPost(
-  'reply8',
-  users[3],
-  'Great tip! Do you have a favorite resource for learning layout systems?',
-  'post3',
-  [],
-  0.6
-);
-
-const reply9 = createPost(
-  'reply9',
-  users[4],
-  'Mostly ambient electronic with some chillhop vibes 🎧',
-  'reply4',
-  [],
-  0.4
-);
-
-const reply10 = createPost(
-  'reply10',
-  users[1],
-  'That book changed my routine too. Habit stacking is a game changer!',
-  'post4',
-  [],
-  0.7
-);
-
-// Add all posts to the array
-posts.push(post1, post2, post3, post4, post5);
-
-// Add all replies to their parent posts
-const allReplies = [
-  reply1,
-  reply2,
-  reply3,
-  reply4,
-  reply5,
-  reply6,
-  reply7,
-  reply8,
-  reply9,
-  reply10,
+export const dummyPosts: Post[] = [
+  {
+    id: "1",
+    createdAt: "2025-09-24T15:00:00Z",
+    content:
+      "Just launched my new project! Check it out and let me know what you think.",
+    user_id: "1",
+    user: dummyUsers[0],
+    parent_id: null,
+    parent: null,
+    replies: [],
+  },
+  {
+    id: "2",
+    createdAt: "2024-05-01T11:30:00Z",
+    content:
+      "Working on some new digital art pieces. Can't wait to share them with you all!",
+    user_id: "2",
+    user: dummyUsers[1],
+    parent_id: null,
+    parent: null,
+    replies: [],
+  },
+  {
+    id: "3",
+    createdAt: "2024-05-01T12:15:00Z",
+    content: "Just captured this amazing sunset in Bali! 🌅",
+    user_id: "3",
+    user: dummyUsers[2],
+    parent_id: null,
+    parent: null,
+    replies: [],
+  },
+  {
+    id: "4",
+    createdAt: "2024-05-01T13:00:00Z",
+    content: "New workout routine is paying off! Feeling stronger every day 💪",
+    user_id: "4",
+    user: dummyUsers[3],
+    parent_id: null,
+    parent: null,
+    replies: [],
+  },
+  {
+    id: "5",
+    createdAt: "2024-05-01T14:30:00Z",
+    content: "Excited to announce our startup just secured seed funding!",
+    user_id: "5",
+    user: dummyUsers[4],
+    parent_id: null,
+    parent: null,
+    replies: [],
+  },
+  {
+    id: "6",
+    createdAt: "2024-05-01T15:00:00Z",
+    content: "That's amazing! What's the project about?",
+    user_id: "2",
+    user: dummyUsers[1],
+    parent_id: "1",
+    parent: null,
+    replies: [],
+  },
+  {
+    id: "7",
+    createdAt: "2024-05-01T15:30:00Z",
+    content: "It's a new productivity app that helps teams collaborate better.",
+    user_id: "1",
+    user: dummyUsers[0],
+    parent_id: "6",
+    parent: null,
+    replies: [],
+  },
+  {
+    id: "8",
+    createdAt: "2024-05-01T16:00:00Z",
+    content: "The sunset looks incredible! What camera did you use?",
+    user_id: "4",
+    user: dummyUsers[3],
+    parent_id: "3",
+    parent: null,
+    replies: [],
+  },
+  {
+    id: "9",
+    createdAt: "2024-05-01T16:30:00Z",
+    content: "I used my Sony A7III with a 24-70mm lens.",
+    user_id: "3",
+    user: dummyUsers[2],
+    parent_id: "8",
+    parent: null,
+    replies: [],
+  },
+  {
+    id: "10",
+    createdAt: "2024-05-01T17:00:00Z",
+    content: "Congrats on the funding! What's your next milestone?",
+    user_id: "1",
+    user: dummyUsers[0],
+    parent_id: "5",
+    parent: null,
+    replies: [],
+  },
+  {
+    id: "11",
+    createdAt: "2024-05-01T17:30:00Z",
+    content: "We're focusing on expanding our team and launching new features.",
+    user_id: "5",
+    user: dummyUsers[4],
+    parent_id: "10",
+    parent: null,
+    replies: [],
+  },
+  {
+    id: "12",
+    createdAt: "2024-05-01T18:00:00Z",
+    content: "Can you share some tips for staying motivated with workouts?",
+    user_id: "2",
+    user: dummyUsers[1],
+    parent_id: "4",
+    parent: null,
+    replies: [],
+  },
+  {
+    id: "13",
+    createdAt: "2024-05-01T18:30:00Z",
+    content: "Set small, achievable goals and track your progress!",
+    user_id: "4",
+    user: dummyUsers[3],
+    parent_id: "12",
+    parent: null,
+    replies: [],
+  },
+  {
+    id: "14",
+    createdAt: "2024-05-01T19:00:00Z",
+    content: "Love your art style! Do you take commissions?",
+    user_id: "3",
+    user: dummyUsers[2],
+    parent_id: "2",
+    parent: null,
+    replies: [],
+  },
+  {
+    id: "15",
+    createdAt: "2024-05-01T19:30:00Z",
+    content: "Yes, I do! Feel free to DM me for details.",
+    user_id: "2",
+    user: dummyUsers[1],
+    parent_id: "14",
+    parent: null,
+    replies: [],
+  },
 ];
-
-// Function to find a post by ID
-const findPost = (id: string): Post | undefined => {
-  return [...posts, ...allReplies].find(post => post.id === id);
-};
-
-// Build the reply tree
-allReplies.forEach(reply => {
-  const parent = findPost(reply.parent_id!);
-  if (parent) {
-    parent.replies.push(reply);
-    // Set the parent reference
-    reply.parent = parent;
-  }
-});
-
-export { users, posts };
