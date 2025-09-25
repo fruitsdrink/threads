@@ -1,3 +1,5 @@
+import { supabase } from "@/lib/supabase";
+import { useAuth } from "@/providers/auth.provider";
 import { useState } from "react";
 import {
   KeyboardAvoidingView,
@@ -11,6 +13,31 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function NewScreen() {
   const [text, setText] = useState("");
+  const [isPending, setIsPending] = useState(false)
+
+  const {user} = useAuth()
+
+  const handleSubmit = async()=>{
+    if(!text || !user) return;
+    
+    try{
+      setIsPending(true)
+      const {data, error} = await supabase.from('posts').insert({
+        content: text,
+        user_id: user.id
+      })
+
+      
+      if(error) throw error;
+
+      setText("")
+    }catch(error){
+      console.log(error)
+    }finally{
+      setIsPending(false)
+    }
+  }
+
   return (
     <SafeAreaView className="p-4 flex-1" edges={["bottom"]}>
       <KeyboardAvoidingView
@@ -27,16 +54,20 @@ export default function NewScreen() {
           placeholder="What is on your mind?"
           className="text-lg text-white"
           placeholderTextColor={"gray"}
+          autoCapitalize="none"
+          autoCorrect={false}
           multiline
           numberOfLines={4}
         />
 
         <View className="mt-auto">
           <Pressable
-            onPress={() => console.log("post: ")}
+            onPress={handleSubmit}
             className="bg-white py-2 px-6 rounded-full self-end"
+            
+            disabled={isPending}
           >
-            <Text className="text-black font-bold">Post</Text>
+            <Text className="text-black font-bold">{isPending ? "Posting..." : "Post"}</Text>
           </Pressable>
         </View>
       </KeyboardAvoidingView>

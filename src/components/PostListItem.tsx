@@ -13,14 +13,14 @@ dayjs.locale("zh-cn");
 
 export const PostListItem: React.FC<Props> = ({ post }) => {
   const { user } = post;
-  const time = dayjs(post.createdAt).fromNow();
+  const time = dayjs(post.created_at).fromNow();
 
   return (
     <View className="flex-row p-4 border-b border-gray-800/70">
       {/* 头像 */}
       <View className="mr-3">
         <Image
-          source={{ uri: user.image }}
+          source={{ uri: user.avatar_url }}
           className="w-12 h-12 rounded-full"
         />
       </View>
@@ -38,7 +38,7 @@ export const PostListItem: React.FC<Props> = ({ post }) => {
         <View className="flex-row gap-4 mt-2">
           <Pressable className="flex-row items-center gap-1">
             <Ionicons name="heart-outline" size={16} color={"#d1d5db"} />
-            <Text className="text-gray-300 ml-2">{post.replies.length}</Text>
+            <Text className="text-gray-300 ml-2">{post.replies?.length}</Text>
           </Pressable>
           <Pressable className="flex-row items-center gap-1">
             <Ionicons name="chatbubble-outline" size={16} color={"#d1d5db"} />
