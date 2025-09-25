@@ -1,5 +1,7 @@
 import { supabase } from "@/lib/supabase";
 import { useAuth } from "@/providers/auth.provider";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { router } from "expo-router";
 import { useState } from "react";
 import {
   KeyboardAvoidingView,
@@ -11,31 +13,45 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+const createPost = async(content: string, user_id: string) => {
+  const {data} = await supabase.from('posts').insert({
+    content,
+    user_id
+  })
+  .select("*")
+  .single()
+  .throwOnError()
+
+  return data
+}
+
 export default function NewScreen() {
   const [text, setText] = useState("");
-  const [isPending, setIsPending] = useState(false)
 
   const {user} = useAuth()
 
-  const handleSubmit = async()=>{
+  const queryClient = useQueryClient()
+
+
+  const {mutate, isPending, error} = useMutation({
+    mutationFn: ()=>createPost(text, user!.id),
+    onSuccess: ()=>{
+      setText("")
+      queryClient.invalidateQueries({
+        queryKey: ["posts"],
+      })
+      router.back()
+    },
+    onError: ()=>{
+      console.error(error)
+    //  Alert.alert("Error", "Something went wrong") 
+    }
+  })
+
+  const handleSubmit = ()=>{
     if(!text || !user) return;
     
-    try{
-      setIsPending(true)
-      const {data, error} = await supabase.from('posts').insert({
-        content: text,
-        user_id: user.id
-      })
-
-      
-      if(error) throw error;
-
-      setText("")
-    }catch(error){
-      console.log(error)
-    }finally{
-      setIsPending(false)
-    }
+     mutate()
   }
 
   return (
@@ -60,10 +76,16 @@ export default function NewScreen() {
           numberOfLines={4}
         />
 
+        {
+          error && (
+            <Text className="text-red-500 mt-4 text-sm">{error.message}</Text>
+          ) 
+        }
+
         <View className="mt-auto">
           <Pressable
             onPress={handleSubmit}
-            className="bg-white py-2 px-6 rounded-full self-end"
+            className={`bg-white py-2 px-6 rounded-full self-end ${isPending ? "opacity-50" : ""}`}
             
             disabled={isPending}
           >
