@@ -1,12 +1,16 @@
-import { Post } from "@/types";
-import { View, Text, Image, TouchableOpacity, Pressable } from "react-native";
+import { View, Text, Image, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/zh-cn";
+import { Tables } from "@/types/database.types";
+
+type PostWithUser = Tables<"posts"> & {
+  user: Tables<"profiles">;
+};
 
 type Props = {
-  post: Post;
+  post: PostWithUser;
 };
 dayjs.extend(relativeTime);
 dayjs.locale("zh-cn");
@@ -20,7 +24,7 @@ export const PostListItem: React.FC<Props> = ({ post }) => {
       {/* 头像 */}
       <View className="mr-3">
         <Image
-          source={{ uri: user.avatar_url }}
+          source={{ uri: user.avatar_url! }}
           className="w-12 h-12 rounded-full"
         />
       </View>
@@ -38,7 +42,7 @@ export const PostListItem: React.FC<Props> = ({ post }) => {
         <View className="flex-row gap-4 mt-2">
           <Pressable className="flex-row items-center gap-1">
             <Ionicons name="heart-outline" size={16} color={"#d1d5db"} />
-            <Text className="text-gray-300 ml-2">{post.replies?.length}</Text>
+            <Text className="text-gray-300 ml-2">{0}</Text>
           </Pressable>
           <Pressable className="flex-row items-center gap-1">
             <Ionicons name="chatbubble-outline" size={16} color={"#d1d5db"} />
